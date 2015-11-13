@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.rule" id="filter_state_rule">
+            <field name="name">filter.rule</field>
+            <field name="model_id" ref="model_dtbs_academic_filter"/>
+            <field name="domain">[('state', '=', 'done')]</field>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+            <field name="perm_create" eval="True"/>
+        </record>
+     </data>
+</openerp>

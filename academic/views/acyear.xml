@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="acyear_form_view">
+            <field name="name">acyear.form</field>
+            <field name="model">dtbs.academic.acyear</field>
+            <field name="arch" type="xml">
+                <form string="Form Tahun Akademik">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="tahun"/>
+                            <field name="desc"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="acyear_search_view">
+            <field name="name">acyear.search</field>
+            <field name="model">dtbs.academic.acyear</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="tahun"/>
+                    <field name="desc"/>
+                </search>
+            </field>
+        </record>
+        <!-- window action -->
+        <!--
+            The following tag is an action definition for a "window action",
+            that is an action opening a view or a set of views
+        -->
+        <record model="ir.actions.act_window" id="acyear_list_action">
+            <field name="name">Tahun Akademik</field>
+            <field name="res_model">dtbs.academic.acyear</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Buat tahun akademik baru di sini
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="acyear_menu" name="Tahun Akademik" parent="config_menu"
+                  sequence="204"
+                  action="acyear_list_action"/>
+    </data>
+</openerp>

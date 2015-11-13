@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="filter_tree_view">
+            <field name="name">filter.tree</field>
+            <field name="model">dtbs.academic.filter</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="filter_tree" toolbar="1">
+                    <field name="name"/>
+                    <field name="tahun_id"/>
+                    <field name="faculty_id"/>
+                    <field name="department_id"/>
+                    <field name="study_id"/>
+                    <field name="kuota"/>
+                    <field name="min"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="filter_form_view">
+            <field name="name">filter.form</field>
+            <field name="model">dtbs.academic.filter</field>
+            <field name="arch" type="xml">
+                <form string="Form Saringan Masuk">
+                    <header>
+                        <!--<button name="action_draft" type="object"
+                                string="Draft"
+                                states="done"/>-->
+                        <button name="action_lulus" type="object"
+                                string="Lulus"
+                                states="draft"
+                                class="oe_highlight"/>
+                        <button name="action_reload" type="object"
+                                string="Reload"
+                                attrs="{'invisible':[('state', '=', 'done')]}"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="kuota"/>
+                                <field name="min" readonly="1"/>
+                            </group>
+                            <group>
+                                <field name="tahun_id" on_change="onchange_study(study_id, tahun_id, faculty_id, department_id, kuota)"/>
+                                <field name="faculty_id" on_change="onchange_faculty(faculty_id)"/>
+                                <field name="department_id" on_change="onchange_department(department_id)"/>
+                                <field name="study_id" on_change="onchange_study(study_id, tahun_id, faculty_id, department_id, kuota)"/>
+                            </group>
+                        </group>
+                    
+                        <notebook>
+                            <page string="Daftar Calon Siswa">
+                                <field name="filterlist_ids" widget="many2many" domain="[('is_registran', '=', True), ('faculty_id', '=', faculty_id), ('department_id', '=', department_id), ('study_id', '=', study_id), ('tahun', '=', tahun_id), ('sts_academic', '=', 'calon')]">
+                                    <tree>
+                                        <field name="name"/>
+                                        <field name="noform"/>
+                                        <field name="tgluji"/>
+                                        <field name="nilai"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="filter_search_view">
+            <field name="name">filter.search</field>
+            <field name="model">dtbs.academic.filter</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="tahun_id"/>
+                    <field name="faculty_id"/>
+                    <field name="department_id"/>
+                    <field name="study_id"/>
+                    <field name="kuota"/>
+                    <field name="min"/>
+                    <field name="state"/>
+                    <group expand="0" string="Group By">
+                        <filter string="State" domain="[]" context="{'group_by':'state'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- window action -->
+        <!--
+            The following tag is an action definition for a "window action",
+            that is an action opening a view or a set of views
+        -->
+        <record model="ir.actions.act_window" id="filter_list_action">
+            <field name="name">Saringan Masuk</field>
+            <field name="res_model">dtbs.academic.filter</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Buat saringan masuk baru di sini
+                </p>
+            </field>
+        </record>
+        <menuitem id="filter_menu" name="Saringan Masuk" parent="enroll_menu"
+                  sequence="102"
+                  action="filter_list_action"/>
+    </data>
+</openerp>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <!-- top level menu: no parent -->
+        <menuitem id="main_academic_menu" name="Akademik"/>
+        <!-- Pendaftaran -->
+        <menuitem id="enroll_menu" name="Pendaftaran" parent="main_academic_menu" sequence="100"/>
+        <!-- Kelas -->
+        <menuitem id="class_menu" name="Kelas" parent="main_academic_menu" sequence="200"/>
+        <!-- Mahasiswa -->
+        <menuitem id="student_menu" name="Mahasiswa" parent="main_academic_menu" sequence="400"/>
+        <!-- Dosen -->
+        <menuitem id="mainteacher_menu" name="Dosen" parent="main_academic_menu" sequence="600"/>
+        <!-- Konfigurasi -->
+        <menuitem id="config_menu" name="Konfigurasi" parent="main_academic_menu" sequence="800"/>
+    </data>
+</openerp>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="study_tree_view">
+            <field name="name">study.tree</field>
+            <field name="model">dtbs.academic.study</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="study_tree" toolbar="1">
+                    <field name="faculty_id"/>
+                    <field name="department_id"/>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="study_form_view">
+            <field name="name">study.form</field>
+            <field name="model">dtbs.academic.study</field>
+            <field name="arch" type="xml">
+                <form string="Form Program Studi">
+                    <sheet>
+                        <group>
+                            <field name="faculty_id" on_change="onchange_faculty(faculty_id)"/>
+                            <field name="department_id"/>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="study_search_view">
+            <field name="name">study.search</field>
+            <field name="model">dtbs.academic.study</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="faculty_id"/>
+                    <field name="department_id"/>
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+        <!-- window action -->
+        <!--
+            The following tag is an action definition for a "window action",
+            that is an action opening a view or a set of views
+        -->
+        <record model="ir.actions.act_window" id="study_list_action">
+            <field name="name">Program Studi</field>
+            <field name="res_model">dtbs.academic.study</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Buat program studi baru di sini
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="study_menu" name="Program Studi" parent="config_menu"
+                  sequence="203"
+                  action="study_list_action"/>
+    </data>
+</openerp>

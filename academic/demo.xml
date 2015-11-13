@@ -1,0 +1,24 @@
+<openerp>
+    <data>
+        <record id="prospect0" model="dtbs.academic.prospect">
+            <field name="name">Prospect 0</field>
+            <field name="description">Prospect 0's description can have multiple line</field>
+        </record>
+        <record id="prospect1" model="dtbs.academic.prospect">
+            <field name="name">Prospect 1</field> 
+        </record>
+        <record id="prospect2" model="dtbs.academic.prospect"> 
+            <field name="name">Prospect 2</field>
+            <field name="description">Prospect 2's description</field>
+        </record>
+        <!--  -->
+        <!--   <record id="object3" model="academic.academic"> -->
+        <!--     <field name="name">Object 3</field> -->
+        <!--   </record> -->
+        <!--  -->
+        <!--   <record id="object4" model="academic.academic"> -->
+        <!--     <field name="name">Object 4</field> -->
+        <!--   </record> -->
+        <!--  -->
+    </data>
+</openerp>

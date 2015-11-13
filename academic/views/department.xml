@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="department_tree_view">
+            <field name="name">department.tree</field>
+            <field name="model">dtbs.academic.department</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="department_tree" toolbar="1">
+                    <field name="faculty_id"/>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="department_form_view">
+            <field name="name">department.form</field>
+            <field name="model">dtbs.academic.department</field>
+            <field name="arch" type="xml">
+                <form string="Form Jurusan">
+                    <sheet>
+                        <group>
+                            <field name="faculty_id"/>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="department_search_view">
+            <field name="name">department.search</field>
+            <field name="model">dtbs.academic.department</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="faculty_id"/>
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+        <!-- window action -->
+        <!--
+            The following tag is an action definition for a "window action",
+            that is an action opening a view or a set of views
+        -->
+        <record model="ir.actions.act_window" id="department_list_action">
+            <field name="name">Jurusan</field>
+            <field name="res_model">dtbs.academic.department</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Buat jurusan baru di sini
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="department_menu" name="Jurusan" parent="config_menu"
+                  sequence="202"
+                  action="department_list_action"/>
+    </data>
+</openerp>

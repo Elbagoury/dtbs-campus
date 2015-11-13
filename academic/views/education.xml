@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="education_tree_view">
+            <field name="name">education.tree</field>
+            <field name="model">dtbs.academic.education</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="education_tree" toolbar="1">
+                    <!--<field name="partner_id"/>-->
+                    <field name="name"/>
+                    <field name="tingkat"/>
+                    <field name="thnm"/>
+                    <field name="thnl"/>
+                    <field name="nilai"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="education_form_view">
+            <field name="name">education.form</field>
+            <field name="model">dtbs.academic.education</field>
+            <field name="arch" type="xml">
+                <form string="Form Pendidikan">
+                    <sheet>
+                        <group>
+                            <group>
+                                <!--<field name="partner_id"/>-->
+                                <field name="name"/>
+                                <field name="tingkat"/>
+                            </group>
+                            <group>
+                                <field name="thnm"/>
+                                <field name="thnl"/>
+                                <field name="nilai"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- window action -->
+        <!--
+            The following tag is an action definition for a "window action",
+            that is an action opening a view or a set of views
+        -->
+        <record model="ir.actions.act_window" id="education_list_action">
+            <field name="name">Pendidikan</field>
+            <field name="res_model">dtbs.academic.education</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Buat pendidikan baru di sini
+                </p>
+            </field>
+        </record>
+
+    </data>
+</openerp>

@@ -1,0 +1,66 @@
+from openerp import models, fields, api
+from openerp.exceptions import ValidationError
+
+s Filter(models.Model):
+    _name = "dtbs.academic.filter"
+
+    name          = fields.Char("Kode", size=50, required=True)
+    kuota         = fields.Integer("Kuota", required=True)
+    min           = fields.Float("Nilai Minimal", compute="_compute_min_nilai", store=True)
+    tahun_id      = fields.Many2one("dtbs.academic.acyear", "Tahun Akademik", required=True)
+    faculty_id    = fields.Many2one("dtbs.academic.faculty", "Fakultas", required=True)
+    department_id = fields.Many2one("dtbs.academic.department", "Jurusan", required=True)
+    study_id      = fields.Many2one("dtbs.academic.study", "Program Studi", required=True)
+    state         = fields.Selection(state_selection, "Status", default=state_selection[0][0])
+    filterlist_ids = fields.Many2many("res.partner", "dtbs_academic_filter_relation")
+
+ 
+
+    @api.constrains("kuota", "filterlist_ids")
+    def _overload_kuota(self, cr, uid, ids, context=None):
+        new_list2 = []
+        for obj in self.browse(cr, uid, ids, context=context):
+            if obj.kuota <=0:
+                raise ValidationError("Periksa kembali kuota !")
+            for field in obj.filterlist_ids:
+                new_list2.append(field.id)
+            if obj.kuota < len(new_list2):
+                raise ValidationError("Kuota sudah penuh !")
+      
+  
+    @api.depends('filterlist_ids')
+    def _compute_min_nilai(self):
+        try:
+            self.min = min(record.nilai for record in self.filterlist_ids)
+        except:
+            self.min = 0
+
+    @api.multi
+    def onchange_faculty(self, faculty):
+        if not faculty:
+            return {"domain": {"department_id": []}}
+
+        dpt = self.env['dtbs.academic.department'].search([("faculty_id", "ilike", faculty)])
+        return {
+            "domain": {"department_id": [("id", "in", dpt.ids)]},
+            "value": {"department_id": None}
+        }
+
+    @api.multi
+    def onchange_department(self, department):
+        if not department:
+            return {"domain": {"study_id": []}}
+
+        std = self.env['dtbs.academic.study'].search([("department_id", "ilike", department)])
+        return {
+            "domain": {"study_id": [("id", "in", std.ids)]},
+            "value": {"study_id": None}
+        }
+
+    @api.one
+    def action_draft(self):
+        self.state = "draft"
+
+    @api.one
+    def action_lulus(self):
+        self.state = "done"

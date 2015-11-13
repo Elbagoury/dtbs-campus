@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="employee_teacher_form_view">
+            <field name="name">employee.teacher.form</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                 <data>
+                     <xpath expr="//field[@name='coach_id']" position="after">
+                          <field name="is_teacher" readonly="1"/>                  
+                     </xpath>
+                 </data>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="employee_teacher_search_view">
+            <field name="name">teacher.search</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_filter"/>
+            <field name="arch" type="xml">
+                <!--<search>
+                    <field name="work_phone"/>
+                    <filter name="my_teacher" string="Dosen"
+                            domain="[('is_teacher', '=', True)]"/>
+                </search>-->
+                <xpath expr="//group[@string='Group By']" position="after">
+                    <filter name="my_teacher" string="Dosen"
+                            domain="[('is_teacher', '=', True)]"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="teacher_list_action">
+            <field name="name">Dosen</field>
+            <field name="res_model">hr.employee</field>
+            <field name="view_mode">tree,form,kanban</field>
+            <field name="context">{'default_is_teacher':True, 'search_default_my_teacher':1}</field>
+        </record>
+
+        <menuitem id="teacher_menu" name="Dosen" parent="mainteacher_menu"
+                  sequence="601"
+                  action="teacher_list_action"/>   
+    </data>
+</openerp>

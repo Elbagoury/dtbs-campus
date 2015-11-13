@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="filter_tree_view">
+            <field name="name">filter.tree</field>
+            <field name="model">dtbs.academic.filter</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="filter_tree" toolbar="1">
+                    <field name="name"/>
+                    <field name="tahun_id"/>
+                    <field name="faculty_id"/>
+                    <field name="department_id"/>
+                    <field name="study_id"/>
+                    <field name="kuota"/>
+                    <field name="min"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="filter_form_view">
+            <field name="name">filter.form</field>
+            <field name="model">dtbs.academic.filter</field>
+            <field name="arch" type="xml">
+                <form string="Form Saringan Masuk">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="kuota"/>
+                                <field name="min"/>
+                            </group>
+                            <group>
+                                <field name="tahun_id"/>
+                                <field name="faculty_id" on_change="onchange_faculty(faculty_id)"/>
+                                <field name="department_id" on_change="onchange_department(department_id)"/>
+                                <field name="study_id"/>
+                            </group>
+                        </group>
+                    </sheet>
+anside">
+                        <page string="Daftar Calon Siswa">
+                            <group>
+                                TES
+                            </group>
+                        </page>
+                    </notebook>
+                </form>
+            </field>
+        </record>
+
+        <!-- window action -->
+        <!--
+            The following tag is an action definition for a "window action",
+            that is an action opening a view or a set of views
+        -->
+        <record model="ir.actions.act_window" id="filter_list_action">
+            <field name="name">Saringan Masuk</field>
+            <field name="res_model">dtbs.academic.filter</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Buat saringan masuk baru di sini
+                </p>
+            </field>
+        </record>
+        <menuitem id="filter_menu" name="Saringan Masuk" parent="enroll_menu"
+                  action="filter_list_action"/>
+    </data>
+</openerp>

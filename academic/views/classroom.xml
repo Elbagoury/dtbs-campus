@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="classroom_tree_view">
+            <field name="name">classroom.tree</field>
+            <field name="model">dtbs.academic.classroom</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="classroom_tree" toolbar="1">
+                    <field name="name"/>
+                    <field name="desc"/>
+                    <field name="dosen_id"/>
+                    <field name="tahun_id"/>
+                    <field name="faculty_id"/>
+                    <field name="department_id"/>
+                    <field name="study_id"/>
+                    <field name="kuota"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="classroom_form_view">
+            <field name="name">classroom.form</field>
+            <field name="model">dtbs.academic.classroom</field>
+            <field name="arch" type="xml">
+                <form string="Form Kelas">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="desc"/>
+                                <field name="dosen_id" domain="[('is_teacher', '=', True)]" options="{'no_quick_create': True, 'no_create_edit': True}"/>
+                                <field name="kuota"/>
+                            </group>
+                            <group>
+                                <field name="tahun_id"/>
+                                <field name="faculty_id" on_change="onchange_faculty(faculty_id)"/>
+                                <field name="department_id" on_change="onchange_department(department_id)"/>
+                                <field name="study_id"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- window action -->
+        <!--
+            The following tag is an action definition for a "window action",
+            that is an action opening a view or a set of views
+        -->
+        <record model="ir.actions.act_window" id="classroom_list_action">
+            <field name="name">Kelas</field>
+            <field name="res_model">dtbs.academic.classroom</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Buat kelas baru di sini
+                </p>
+            </field>
+        </record>
+        <menuitem id="classroom_menu" name="Kelas" parent="class_menu"
+                  sequence="201"
+                  action="classroom_list_action"/>
+    </data>
+</openerp>

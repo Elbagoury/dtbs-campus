@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="religion_form_view">
+            <field name="name">religion.form</field>
+            <field name="model">dtbs.academic.religion</field>
+            <field name="arch" type="xml">
+                <form string="Form Agama">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="religion_search_view">
+            <field name="name">religion.search</field>
+            <field name="model">dtbs.academic.religion</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+        <!-- window action -->
+        <!--
+            The following tag is an action definition for a "window action",
+            that is an action opening a view or a set of views
+        -->
+        <record model="ir.actions.act_window" id="religion_list_action">
+            <field name="name">Agama</field>
+            <field name="res_model">dtbs.academic.religion</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Buat agama baru di sini
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="religion_menu" name="Agama" parent="config_menu"
+                  sequence="205"
+                  action="religion_list_action"/>
+    </data>
+</openerp>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="faculty_form_view">
+            <field name="name">faculty.form</field>
+            <field name="model">dtbs.academic.faculty</field>
+            <field name="arch" type="xml">
+                <form string="Form Fakultas">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="faculty_search_view">
+            <field name="name">faculty.search</field>
+            <field name="model">dtbs.academic.faculty</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+        <!-- window action -->
+        <!--
+            The following tag is an action definition for a "window action",
+            that is an action opening a view or a set of views
+        -->
+        <record model="ir.actions.act_window" id="faculty_list_action">
+            <field name="name">Fakultas</field>
+            <field name="res_model">dtbs.academic.faculty</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Buat fakultas baru di sini
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="faculty_menu" name="Fakultas" parent="config_menu"
+                  sequence="201"
+                  action="faculty_list_action"/>
+    </data>
+</openerp>
